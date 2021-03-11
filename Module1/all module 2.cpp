@@ -25,6 +25,70 @@ double area(double x1, double y1, double x2, double y2, double x3, double y3) {
 }
 */
 
+// exercise 3.2
+
+/*
+bool isprime(int& n) {
+	bool prime = true;
+	if (n == 1 || n == 0)
+		return false;
+	for (int i = 2; i <= (int)sqrt(n); i++) {
+		if (n % i == 0) {
+			prime = false;
+			break;
+		}
+	}
+	return prime;
+}
+*/
+
+// exercise 3.3
+
+/*
+double root(double& n, double& delta, int& nMaxIter) {
+	double rq = 1, rqn{ 1 };
+	int PRECISION{};
+	double i = delta - (int)delta;
+
+	while (i != 0) {
+		PRECISION += 1;
+		i = i * 10;
+		i = i - (int)i;
+	}
+	cout << fixed << setprecision(PRECISION) << endl;
+
+	while (nMaxIter != 0 && abs(n - pow(rqn, 2)) > delta) {
+		rqn = (rq + n / rq) / 2;
+		rq = rqn;
+		nMaxIter--;
+	}
+	return rq;
+}
+*/
+
+//exercise 3.4
+
+int gcd(int& a, int& b) {
+	if (a == 0 || b == 0)
+		if (a == 0)
+			return b;
+		else
+			return a;
+	while (a != b)
+	{
+		if (a < b)
+			b -= a;
+		else
+			a -= b;
+	}
+	return a;
+}
+/*
+double round(double& x, unsigned& n) {
+	return floor(x * pow(10, n) + 0.5) / pow(10, n);
+}
+*/
+
 int main() {
 
 	/*
@@ -653,6 +717,7 @@ int main() {
 		}
 		else if (isalpha(n)) {
 			cin >> chr;
+			n = r;
 			cin.clear();
 		}
 		else {
@@ -746,6 +811,65 @@ int main() {
 
 	cout << "Area = " << area(x1, y1, x2, y2, x3, y3);
 	*/
+
+	// exercise 3.2.
+
+	/*
+	int a;
+	bool c;
+
+	do {
+		cout << "a number: \n";
+		cin >> a;
+		c = isprime(a);
+		if (c)
+			cout << a << " is a prime" << endl;
+		else
+			cout << a << " is not a prime" << endl;
+	} while (!cin.fail());
+	*/
+
+	// exercise 3.3.
+
+	/*
+	double x, p;
+	int max;
+
+	do {
+		cout << "Root of:" << endl;
+		cin >> x;
+		cout << "Precision of:" << endl;
+		cin >> p;
+		cout << "Max interations of:" << endl;
+		cin >> max;
+		cout << root(x, p, max) << endl;
+	} while (!cin.fail());
+	*/
+
+	// exercise 3.4.
+	
+	/*
+	double x;
+	unsigned n;
+	do {
+		cout << "x : \n";
+		cin >> x;
+		cout << "decimal places : \n";
+		cin >> n;
+		cout << "round...ing :) ... \n" << round(x, n) << endl;
+
+	} while (!cin.fail());
+	*/
+
+	// exercise 3.5.
+
+	int a, b;
+
+	cout << "tell us 2 numbers ... \n";
+	cin >> a >> b;
+
+	cout << "gcd = " << gcd(a, b);
+	
 
 	return 0;
 }
