@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <chrono>
 #include <new>
+#include <string>
 using namespace std;
 
 // exercise 3.1.
@@ -68,6 +69,15 @@ double root(double& n, double& delta, int& nMaxIter) {
 
 //exercise 3.4
 
+/*
+double round(double& x, unsigned& n) {
+	return floor(x * pow(10, n) + 0.5) / pow(10, n);
+}
+*/
+
+// exercise 3.5
+
+/*
 int gcd(int& a, int& b) {
 	if (a == 0 || b == 0)
 		if (a == 0)
@@ -83,9 +93,36 @@ int gcd(int& a, int& b) {
 	}
 	return a;
 }
+*/
+
+// exercise 3.6.
+
 /*
-double round(double& x, unsigned& n) {
-	return floor(x * pow(10, n) + 0.5) / pow(10, n);
+int time_counter() {
+	static chrono::steady_clock sc;
+	static auto last_time = sc.now();
+	auto start = sc.now();
+	auto time = static_cast<chrono::duration<double>>(start - last_time);
+	last_time = start;
+	return time.count();
+}
+*/
+
+// exercise 3.7. -- TODO
+
+/*
+bool readInt(int& x) {
+	char str[256];
+	cin >> x;
+	if (cin.fail()) {
+		return false;
+	}
+	if () {
+		cin.ignore(1000000, '\n');
+		return false;
+	}
+	cin.ignore(1000000, '\n');
+	return true;
 }
 */
 
@@ -863,13 +900,37 @@ int main() {
 
 	// exercise 3.5.
 
+	/*
 	int a, b;
 
 	cout << "tell us 2 numbers ... \n";
 	cin >> a >> b;
 
 	cout << "gcd = " << gcd(a, b);
+	*/
+
+	// exercise 3.6.
 	
+	/*
+	do {
+		cout << "Call?";
+		cin.ignore();
+		if (cin.get() == '\n') {
+			cout << time_counter() << endl;
+		}
+	} while (!cin.fail());
+	*/
+
+	// exercise 3.7.
+	
+	/*
+	int x;
+	do {
+		cout << "another?"<< endl;
+		if (readInt(x));
+			cout << x << endl;
+	} while (!cin.fail());
+	*/
 
 	return 0;
 }
