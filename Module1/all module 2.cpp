@@ -108,23 +108,27 @@ int time_counter() {
 }
 */
 
-// exercise 3.7. -- TODO
+// exercise 3.7.
 
-/*
+
 bool readInt(int& x) {
 	char str[256];
+	int extraInputChars;
 	cin >> x;
 	if (cin.fail()) {
 		return false;
 	}
-	if () {
-		cin.ignore(1000000, '\n');
+	cin.ignore(' ');
+	extraInputChars = cin.rdbuf()->in_avail(); 
+	if (extraInputChars > 1) {
+		cin.ignore(extraInputChars, '\n');
 		return false;
 	}
 	cin.ignore(1000000, '\n');
 	return true;
 }
-*/
+
+
 
 int main() {
 
@@ -923,14 +927,15 @@ int main() {
 
 	// exercise 3.7.
 	
-	/*
+
 	int x;
+	bool d;
 	do {
 		cout << "another?"<< endl;
-		if (readInt(x));
+		if (readInt(x))
 			cout << x << endl;
 	} while (!cin.fail());
-	*/
+
 
 	return 0;
 }
