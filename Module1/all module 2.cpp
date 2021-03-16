@@ -79,6 +79,10 @@ double round(double& x, unsigned& n) {
 
 
 int gcd(int a, int b) {
+	if (a < 0)
+		a = -a;
+	if (b < 0)
+		b = -b;
 	if (a == 0 || b == 0)
 		if (a == 0)
 			return b;
@@ -147,8 +151,13 @@ bool validop(char ch) {
 	return (ch == '+' || ch == '-' || ch == '/' || ch == '*');
 }
 void performop(int& numerator, int& denominator, char ch, int d = 0, int n = 0, char lop = '+') {
+
+	// could improve code by adding a || and && operator
 	if (ch == '+') {
-		numerator = numerator * d + n * denominator;
+		if (lop == '+')
+			numerator = numerator * d + n * denominator;
+		if (lop == '-')
+			numerator = numerator * d - n * denominator;
 		denominator *= d;
 		reduceFraction(numerator, denominator);
 		return;
@@ -987,6 +996,7 @@ int main() {
 
 	// exercise 3.8
 
+
 	int n, d;
 	char separator, lastop = '+';
 	int r1{}, r2{1};
@@ -1005,19 +1015,20 @@ int main() {
 				cin >> c;
 				if (c == '+') {
 					performop(r1, r2, c, d, n, lastop);
-					lastop = '+'; // remenber last operation +-
+					lastop = '+'; // remember last operation +-
 					break;
 				}
 				else if (c == '-') {
 					performop(r1, r2, c, d, n, lastop);
-					lastop = '-'; // remenber last operation +-
+					lastop = '-'; // remember last operation +-
 					break;
 				}
 				performop(n, d, c);
 			}
-			else // to break use a invalid op
+			else {// to break use a invalid op
 				performop(r1, r2, '-', d, n, lastop);
 				break;
+			}
 		}
 	} while (!cin.fail());
 	cout << r1 << ' ' << r2;
