@@ -75,10 +75,10 @@ double round(double& x, unsigned& n) {
 }
 */
 
-// exercise 3.5
+// exercise 3.5 - changed after 3.8
 
-/*
-int gcd(int& a, int& b) {
+
+int gcd(int a, int b) {
 	if (a == 0 || b == 0)
 		if (a == 0)
 			return b;
@@ -93,7 +93,7 @@ int gcd(int& a, int& b) {
 	}
 	return a;
 }
-*/
+
 
 // exercise 3.6.
 
@@ -110,15 +110,16 @@ int time_counter() {
 
 // exercise 3.7.
 
-
+/*
 bool readInt(int& x) {
 	char str[256];
 	int extraInputChars;
 	cin >> x;
 	if (cin.fail()) {
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		return false;
 	}
-	cin.ignore(' ');
 	extraInputChars = cin.rdbuf()->in_avail(); 
 	if (extraInputChars > 1) {
 		cin.ignore(extraInputChars, '\n');
@@ -126,8 +127,55 @@ bool readInt(int& x) {
 	}
 	cin.ignore(1000000, '\n');
 	return true;
-}
+*/
 
+// exercise 3.8 using 3.5
+
+bool readFraction(int& numerator, int& denominator) {
+	if (denominator == 0) {
+		numerator = 0;
+		return false;
+	}
+	return true;
+}
+void reduceFraction(int& numerator, int& denominator) {
+	int a = gcd(numerator, denominator);
+	numerator = numerator / a;
+	denominator = denominator / a;
+}
+bool validop(char ch) {
+	return (ch == '+' || ch == '-' || ch == '/' || ch == '*');
+}
+void performop(int& numerator, int& denominator, char ch, int d = 0, int n = 0, char lop = '+') {
+	if (ch == '+') {
+		numerator = numerator * d + n * denominator;
+		denominator *= d;
+		reduceFraction(numerator, denominator);
+		return;
+	}
+	else if (ch == '-') {
+		if (lop == '+')
+			numerator = numerator * d + n * denominator;
+		if (lop == '-')
+			numerator = numerator * d - n * denominator;
+		denominator *= d;
+		reduceFraction(numerator, denominator);
+		return;
+	}
+	int n2, d2;
+	char sep;
+	cin >> n2 >> sep >> d2;
+	if (ch == '*' && sep == '/') {
+		numerator *= n2;
+		denominator *= d2;
+		reduceFraction(numerator, denominator);
+	}
+	else if (ch == '/' && sep == '/') {
+		numerator *= d2;
+		denominator *= n2;
+		reduceFraction(numerator, denominator);
+	}
+}
 
 
 int main() {
@@ -927,7 +975,7 @@ int main() {
 
 	// exercise 3.7.
 	
-
+	/*
 	int x;
 	bool d;
 	do {
@@ -935,7 +983,43 @@ int main() {
 		if (readInt(x))
 			cout << x << endl;
 	} while (!cin.fail());
+	*/
 
+	// exercise 3.8
 
+	int n, d;
+	char separator, lastop = '+';
+	int r1{}, r2{1};
+
+	do {
+		cin >> n >> separator >> d;
+
+		if (separator == '/') {
+			if (readFraction(n, d))
+				reduceFraction(n, d);
+		}
+		while (true) {
+			cin >> ws;
+			char c = cin.peek();
+			if (validop(c)) {
+				cin >> c;
+				if (c == '+') {
+					performop(r1, r2, c, d, n, lastop);
+					lastop = '+'; // remenber last operation +-
+					break;
+				}
+				else if (c == '-') {
+					performop(r1, r2, c, d, n, lastop);
+					lastop = '-'; // remenber last operation +-
+					break;
+				}
+				performop(n, d, c);
+			}
+			else // to break use a invalid op
+				performop(r1, r2, '-', d, n, lastop);
+				break;
+		}
+	} while (!cin.fail());
+	cout << r1 << ' ' << r2;
 	return 0;
 }
