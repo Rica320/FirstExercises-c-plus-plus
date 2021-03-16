@@ -39,5 +39,8 @@
     <ClCompile Include="all module 2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ex3_10 up.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

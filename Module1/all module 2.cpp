@@ -292,7 +292,9 @@ void printMonth(int month, int year) {
 	}
 }
 
-int main() {
+// NAME CHANGED
+
+int main2() {
 
 	/*
 	int max = - INFINITY;
