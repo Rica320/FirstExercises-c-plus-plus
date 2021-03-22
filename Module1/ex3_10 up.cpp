@@ -3,6 +3,7 @@
 #include <climits>
 #include <cmath>
 #include <assert.h>
+#include <vector>
 
 using namespace std;
 
@@ -19,6 +20,15 @@ double area(double x1, double y1, double x2, double y2);
 double integrateTR(double f(double), double a, double b, int n);
 double g(double x);
 double f(double x);
+
+void  readArray(int a[], size_t nElem);
+int findValueInArray(const  int  a[], size_t nElem, int value, size_t pos1 = 0, size_t pos2 = -1);
+size_t findMultValuesInArray(const  int  a[], size_t nElem, int value, size_t pos1, size_t pos2, size_t index[]);
+
+vector<int> readVector();
+size_t findValueInVector(const vector<int>& v, int value, size_t pos1, size_t pos2);
+vector<size_t> findMultValuesInVector(const vector<int>& v, int value, size_t pos1, size_t pos2);
+
 
 // TO REMEMBER LATER
 
@@ -50,6 +60,29 @@ int main() {
 	cout << integrateTR(f, -2, 2, 1000);
 	*/
 
+	// exercise 4.1
+
+	/*
+	const size_t nElem = 5;
+	static int a[nElem];
+	size_t ix[nElem];
+
+
+	readArray(a, nElem);
+	cout << findValueInArray(a, nElem, 10) << endl;
+	for (size_t i = 0; i < findMultValuesInArray(a, nElem, 10, 0, 4, ix); i++) {
+		cout << i[ix];
+	}
+	*/
+
+	// exercise 4.2
+
+	vector<int> vect = readVector();
+	cout << findValueInVector(vect, 10, 0, 3) << endl;
+	vector<size_t> ind = findMultValuesInVector(vect, 10, 0, 3);
+	for (size_t i = 0; i < ind.size(); i++) {
+		cout << ind[i];
+	}
 
 
 	return 0;
@@ -115,3 +148,74 @@ double integrateTR(double f(double), double a, double b, int n) {
 }
 double g(double x) { return x * x; };
 double f(double x) { return sqrt( 4 - x*x); };
+
+// exercise 4.1 
+
+void  readArray(int  a[], size_t nElem) {
+	for (size_t i = 0; i < nElem; i++) {
+		cout << i << " ?"; cin >> a[i];
+	}
+}
+
+int findValueInArray(const  int  a[], size_t nElem, int value, size_t pos1, size_t pos2) {
+	if (pos2 == -1)
+		pos2 = nElem - 1;
+	// changed ...
+	for (size_t i = pos1; i <= pos2; i++) {
+		if (a[i] == value) {
+			return i;
+		}
+	}
+}
+
+size_t findMultValuesInArray(const  int  a[], size_t nElem, int value, size_t pos1, size_t pos2, size_t index[]) {
+	size_t sum{};
+	// putting another variable to help with the index of the array index[] would be better
+	for (int x = 0; x < nElem; x++) {
+		for (size_t i = pos1; i <= pos2; i++) {
+			if (a[i] == value) {
+				index[x] = i;
+				sum++;
+				pos1 = i + 1;
+				break;
+			}
+		}
+	}
+	return sum;
+}
+
+// exercise 4.2
+
+vector<int> readVector() {
+	vector<int> vec;
+	// Can improve by turning the do loop to a while()
+	do {
+		static int i = 0;
+		int x;
+		cout << i << " ?"; cin >> x; 
+		if (cin.fail() && cin.eof())
+			break;
+		vec.push_back(x);
+		i++;
+	} while (!cin.fail() && !cin.eof());
+	return vec;
+}
+
+size_t findValueInVector(const vector<int>& v, int value, size_t pos1, size_t pos2) {
+	for (size_t i = pos1; i <= pos2; i++) {
+		if (v[i] == value) {
+			return i;
+		}
+	}
+	return 9999; // representing a Miss
+}
+
+vector<size_t> findMultValuesInVector(const vector<int>& v, int value, size_t pos1, size_t pos2) {
+	vector<size_t> vec;
+	for (size_t i = pos1; i <= pos2; i++) {
+		if (v[i] == value) {
+			vec.push_back(i);
+		}
+	}
+	return vec;
+}

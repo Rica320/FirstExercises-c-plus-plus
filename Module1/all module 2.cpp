@@ -214,6 +214,7 @@ int daysMonth(int month, int year) {
 
 int dayWeek(int year, int month, int day) {
 	int c;
+	// Can improve code
 	switch (month)
 	{
 	case 1:
