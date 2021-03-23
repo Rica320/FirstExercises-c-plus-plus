@@ -120,6 +120,9 @@ bool readInt(int& x) {
 	char str[256];
 	int extraInputChars;
 	cin >> x;
+
+	// shoud have used cin.peek()=='\n'
+
 	if (cin.fail()) {
 		cin.clear();
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');

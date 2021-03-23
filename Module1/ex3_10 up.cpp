@@ -29,6 +29,10 @@ vector<int> readVector();
 size_t findValueInVector(const vector<int>& v, int value, size_t pos1, size_t pos2);
 vector<size_t> findMultValuesInVector(const vector<int>& v, int value, size_t pos1, size_t pos2);
 
+vector<int> randomVector();
+void bubblesort(vector<int>& avector, char d);
+void bubblesort(vector<int>& avector, bool f(int x, int y));
+void showVector(const vector<int>& vec);
 
 // TO REMEMBER LATER
 
@@ -77,12 +81,48 @@ int main() {
 
 	// exercise 4.2
 
+	/*
 	vector<int> vect = readVector();
 	cout << findValueInVector(vect, 10, 0, 3) << endl;
 	vector<size_t> ind = findMultValuesInVector(vect, 10, 0, 3);
-	for (size_t i = 0; i < ind.size(); i++) {
-		cout << ind[i];
+	for (size_t i = 0; i < vect.size(); i++) {
+		cout << vect[i] << endl;
 	}
+	for (size_t i = 0; i < ind.size(); i++) {
+		cout << ind[i] << endl;
+	}
+	*/
+
+	// exercise 4.3
+
+	vector<int> rvec = randomVector();
+	auto ascending = [](int x, int y) {return x < y; };
+	auto descending = [](int x, int y) {return x > y; };
+
+	cout << "Before: " << endl;
+	showVector(rvec);
+	cout << endl << endl;
+
+	bubblesort(rvec, 'a');
+	cout << "After: (ascending)" << endl;
+	showVector(rvec);
+	cout << endl << endl;
+
+	bubblesort(rvec, 'd');
+	cout << "After: (descending)" << endl;
+	showVector(rvec);
+	cout << endl << endl;
+
+	bubblesort(rvec, ascending);
+	cout << "After: (ascending)" << endl;
+	showVector(rvec);
+	cout << endl << endl;
+
+	bubblesort(rvec, descending);
+	cout << "After: (descending)" << endl;
+	showVector(rvec);
+
+
 
 
 	return 0;
@@ -218,4 +258,58 @@ vector<size_t> findMultValuesInVector(const vector<int>& v, int value, size_t po
 		}
 	}
 	return vec;
+}
+
+// exercise 4.3
+
+vector<int> randomVector() {
+	vector<int> vec;
+	srand(time(NULL));
+	int sizeVector = rand() % 240;
+	for (int i = 0; i < sizeVector; i++) {
+		vec.push_back(rand() % 1000 - 200);
+	}
+	return vec;
+}
+
+void bubblesort(vector<int>& avector, char d) {
+	// line c) ... improving function by the way require
+	for (int i = 0; i < avector.size(); i++) {
+		bool swap = false;
+		for (int n = 0; n < avector.size() - i -1; n++) {
+			if ((avector[n] > avector[n + 1] && d == 'a') || (avector[n] < avector[n + 1] && d == 'd')) {
+				int temp = avector[n];
+				swap = true;
+				avector[n] = avector[n + 1];
+				avector[n + 1] = temp;
+			}
+		}
+		if (!swap)
+			break;
+	}
+}
+void bubblesort(vector<int>& avector, bool f(int x, int y)) {
+	for (int i = 0; i < avector.size(); i++) {
+		bool swap = false;
+		for (int n = 0; n < avector.size() - i - 1; n++) {
+			if (f(avector[n + 1], avector[n])) {
+				int temp = avector[n];
+				swap = true;
+				avector[n] = avector[n + 1];
+				avector[n + 1] = temp;
+			}
+		}
+		if (!swap)
+			break;
+	}
+}
+
+void showVector(const vector<int>& vec) {
+	for (size_t i = 0; i < vec.size(); i++) {
+		if (i == vec.size() - 1) {
+			cout << vec[i] << endl;
+			break;
+		}
+		cout << vec[i] << ',';
+	}
 }
