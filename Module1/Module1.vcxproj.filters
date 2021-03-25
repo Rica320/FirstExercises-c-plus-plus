@@ -42,5 +42,16 @@
     <ClCompile Include="ex3_10 up.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="4.7 up.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="functios_3.10 up.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="functios_3.10 up.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

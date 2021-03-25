@@ -148,6 +148,11 @@
     <ClCompile Include="5.cpp" />
     <ClCompile Include="6.cpp" />
     <ClCompile Include="ex3_10 up.cpp" />
+    <ClCompile Include="4.7 up.cpp" />
+    <ClCompile Include="functios_3.10 up.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="functios_3.10 up.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
