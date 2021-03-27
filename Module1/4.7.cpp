@@ -10,7 +10,8 @@ void showArray(int** a, size_t x);
 bool clearNeighborhood(int**& a, size_t i, size_t j);
 
 
-int main() {
+
+int main3() {
 
 	// exercise 4.7
 
@@ -57,7 +58,7 @@ void localMax(int** a, size_t size) {
 	for (size_t i = 1; i < size - 1; i++) {
 		for (size_t j = 1; j < size - 1; j++) {
 			if (clearNeighborhood(a,i,j)) {
-				cout << "a[" << i << "][" << j << "] =" << a[i][j] << "is a max" << endl;
+				cout << "a[" << i << "][" << j << "] = " << a[i][j] << "is a max" << endl;
 			}
 		}
 	}

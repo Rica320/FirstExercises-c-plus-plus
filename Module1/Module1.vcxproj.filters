@@ -42,15 +42,24 @@
     <ClCompile Include="ex3_10 up.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="4.7 up.cpp">
+    <ClCompile Include="4.7.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="functios_3.10 up.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="4.8 up.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Years_Month_days.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functios_3.10 up.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Years_Month_days.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

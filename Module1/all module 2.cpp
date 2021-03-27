@@ -196,7 +196,7 @@ void performop(int& numerator, int& denominator, char ch, int d = 0, int n = 0, 
 */
 
 // exercise 3.9
-
+/*
 bool isLeapYear(int year) {
 	if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
 		return true;
@@ -295,7 +295,7 @@ void printMonth(int month, int year) {
 			cout << endl;
 	}
 }
-
+*/
 // NAME CHANGED
 
 int main1() {
@@ -1146,6 +1146,7 @@ int main1() {
 
 	// exercise 3.9
 
+	/*
 	int year;
 
 	cout << "year?";
@@ -1156,6 +1157,7 @@ int main1() {
 		printMonth(i, year);
 		cout << endl << endl;
 	}
+	*/
 
 	return 0;
 }

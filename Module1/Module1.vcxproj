@@ -142,17 +142,20 @@
     <ClCompile Include="1.cpp" />
     <ClCompile Include="2.cpp" />
     <ClCompile Include="2_1.cpp" />
+    <ClCompile Include="4.8 up.cpp" />
     <ClCompile Include="all module 2.cpp" />
     <ClCompile Include="3.cpp" />
     <ClCompile Include="4.cpp" />
     <ClCompile Include="5.cpp" />
     <ClCompile Include="6.cpp" />
     <ClCompile Include="ex3_10 up.cpp" />
-    <ClCompile Include="4.7 up.cpp" />
+    <ClCompile Include="4.7.cpp" />
     <ClCompile Include="functios_3.10 up.cpp" />
+    <ClCompile Include="Years_Month_days.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functios_3.10 up.h" />
+    <ClInclude Include="Years_Month_days.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
