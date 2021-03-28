@@ -142,6 +142,7 @@
     <ClCompile Include="1.cpp" />
     <ClCompile Include="2.cpp" />
     <ClCompile Include="2_1.cpp" />
+    <ClCompile Include="4.7 and 4.8.cpp" />
     <ClCompile Include="4.8 up.cpp" />
     <ClCompile Include="all module 2.cpp" />
     <ClCompile Include="3.cpp" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Years_Month_days.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="4.7 and 4.8.h" />
     <ClInclude Include="functios_3.10 up.h" />
     <ClInclude Include="Years_Month_days.h" />
   </ItemGroup>

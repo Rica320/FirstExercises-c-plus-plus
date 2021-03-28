@@ -54,12 +54,18 @@
     <ClCompile Include="Years_Month_days.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="4.7 and 4.8.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="functios_3.10 up.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Years_Month_days.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="4.7 and 4.8.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

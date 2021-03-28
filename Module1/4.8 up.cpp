@@ -3,17 +3,19 @@
 #include <iomanip>
 #include "Years_Month_days.h"
 #include <string>
+#include "4.7 and 4.8.h"
 
 using namespace std;
 
-void randomPluviosityYear(vector<vector<double>>& vec, int year);
-double averagePluviosityDaily(const vector<vector<double>>& vec, int year);
-double averagePluviosityMonth(const vector<vector<double>>& vec, int year, int month);
-vector<string> maximumPluviosity(const vector<vector<double>>& vec, int year);
-vector<string> aboveAverage(const vector<vector<double>>& vec, int year, double ave);
+int as(const void* x, const void* y) {
+	return  (*(int*)x - *(int*)y);
+}
 
 int main() {
 
+	// exercise 4.8
+
+	/*
 	int year;
 	const int Months_a_Year = 12;
 
@@ -43,74 +45,45 @@ int main() {
 		sum++;
 	}
 	cout << sum << " days.";
+	*/
+
+	//exercise 4.11
+
+	size_t x;
+
+	cout << "len of square Matrix ? ";
+	cin >> x;
+
+	// TODO : A malloc function to create a 2d array
+	int** a = new int* [x];
+
+	for (size_t i = 0; i < x; i++) {
+		a[i] = new int[x];
+	}
+
+	randomArrayFill(a, x);
+	showArray(a, x);
+	
+	// TODO : Sort based on colums too 
+
+	/*for (size_t i = 0; i < x; i++) {
+		qsort(a[i], x, sizeof(int), as);
+	}
+	showArray(a, x);*/
+
+	// c)
+
+	for (size_t i = 0; i < x; i++) {
+		qsort(a[i], x/2, sizeof(int), as);
+	}
+	for (size_t i = 0; i < x; i++) {
+		qsort(a[i] + x/2 , x - (x / 2), sizeof(int), as);
+	}
+
+	showArray(a, x);
+
 
 	return 0;
 }
 
-void randomPluviosityYear(vector<vector<double>>& vec, int year) {
-	const int Months_a_Year = 12;
-	srand(time(NULL));
-	for (int m = 0; m < Months_a_Year; m++) {
-		int dm = daysMonth(m + 1, year);
-		for (int d = 0; d < dm; d++) {
-			vec[m].push_back(rand() * 1.0 / RAND_MAX);
-		}
-	}
-}
-double averagePluviosityDaily(const vector<vector<double>>& vec, int year) {
-	double sum = 0;
-	const int Months_a_Year = 12;
-	for (int m = 0; m < Months_a_Year; m++) {
-		int dm = daysMonth(m + 1, year);
-		for (int d = 0; d < dm; d++) {
-			sum += vec[m][d];
-		}
-	}
-	if (isLeapYear(year))
-		return sum / 366;
-	else
-		return sum / 365;
-}
-double averagePluviosityMonth(const vector<vector<double>>& vec, int year, int month) {
-	int dm = daysMonth(month + 1, year);
-	double sum{};
-	for (int d = 0; d < dm; d++) {
-		sum += vec[month][d];
-	}
-	return static_cast<double>(sum / dm);
-}
-vector<string> maximumPluviosity(const vector<vector<double>>& vec, int year) {
-	vector<string> re;
-	int  Months_a_Year = 12;
-	double max{};
-	for (int m = 0; m < Months_a_Year; m++) {
-		int dm = daysMonth(m + 1, year);
-		for (int d = 0; d < dm; d++) {
-			if (vec[m][d] > max) {
-				max = vec[m][d];
-			}
-		}
-	}
-	for (int m = 0; m < Months_a_Year; m++) {
-		int dm = daysMonth(m + 1, year);
-		for (int d = 0; d < dm; d++) {
-			if (vec[m][d] == max) {
-				re.push_back(to_string(d + 1) + " of " + mapMonth(m + 1));
-			}
-		}
-	}
-	return re;
-}
-vector<string> aboveAverage(const vector<vector<double>>& vec, int year, double ave) {
-	vector<string> re;
-	int  Months_a_Year = 12;
-	for (int m = 0; m < Months_a_Year; m++) {
-		int dm = daysMonth(m + 1, year);
-		for (int d = 0; d < dm; d++) {
-			if (vec[m][d] > ave) {
-				re.push_back(to_string(d + 1) + " of " + mapMonth(m + 1));
-			}
-		}
-	}
-	return re;
-}
+// exercise 4.11
