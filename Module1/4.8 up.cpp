@@ -38,6 +38,12 @@ size_t findMultValuesInArray(const int* a, size_t nElem, int value, size_t pos1,
 int findValueInArray(const int* pos1, const int* pos2, int value);
 size_t findMultValuesInArray(const int* pos1, const int* pos2, int value, size_t* index);
 
+char encryptChar(char c, int key);
+string encryptString(string  s, int  key);
+
+string toupperString(string s1);
+void bubbleSort(vector<string>& v, char order);
+
 int main() {
 
 	// exercise 4.8
@@ -118,6 +124,7 @@ int main() {
 
 	// exercise 4.12
 
+	/*
 	size_t x;
 	cout << "Lenght of array ... " << endl; cin >> x;
 
@@ -137,8 +144,33 @@ int main() {
 	size_t element = findMultValuesInArray(a,a+x,1,d);
 	for (size_t i = 0; i < element; i++)
 		cout << d[i] << " , ";
+	*/
 
-	return 0;
+	// exercise 5.1
+
+	/*
+	string str;
+
+	cout << "a string: ";
+	getline(cin, str);
+
+	cout << encryptString(str, 10) << endl;
+	cout << encryptString(str, -10) << endl;
+
+	return 0;*/
+
+	// exercise 5.2
+
+	vector<string> vec{"abc", "ABCD", "aec", "rpdm", "erfd"};
+
+	bubbleSort(vec, 'a');
+	for (int x = 0; x < vec.size(); x++) {
+		cout << vec[x];
+	}
+	bubbleSort(vec, 'd');
+	for (int x = 0; x < vec.size(); x++) {
+		cout << vec[x];
+	}
 }
 
 
@@ -202,3 +234,49 @@ size_t findMultValuesInArray(const int* pos1, const int* pos2, int value, size_t
 	}
 	return sum;
 }
+
+// exercise 5.1
+
+char encryptChar(char c, int key) {
+	if ((int)'A' <= (int)(c) && (int)(c) <= (int)'Z') {
+		c = char(int(c + key - 'A' + 26) % 26 + 'A');
+	}
+	if ((int)'a' <= (int)(c) && (int)(c) <= (int)'z') {
+		c = char(int(c + key - 'a' + 26) % 26 + 'a');
+	}
+	return c;
+}
+
+string encryptString(string  s, int  key) {
+	for (size_t i = 0; i < s.size(); i++) {
+		s[i] = encryptChar(s[i], key);
+	}
+	return s;
+}
+
+// exercise 5.2
+
+string toupperString(string s1) {
+	for (int i = 0; i < s1.size(); i++) {
+		s1[i] = toupper(s1[i]);
+	}
+	return s1;
+}
+
+void bubbleSort(vector<string>& v, char order) {
+
+	for (size_t i = 0; i < v.size(); i++) {
+		bool swap = false;
+		for (size_t n = 0; n < v.size() - i - 1; n++) {
+			if ((toupperString(v[n]) > toupperString(v[n + 1]) && order == 'a') || (toupperString(v[n]) < toupperString(v[n + 1]) && order == 'd')) {
+				string temp = v[n];
+				swap = true;
+				v[n] = v[n + 1];
+				v[n + 1] = temp;
+			}
+		}
+		if (!swap)
+			break;
+	}
+}
+
