@@ -7,6 +7,11 @@
 
 using namespace std;
 
+struct Fraction { 
+	int numerator;
+	int denominator;
+};
+
 int as(const void* x, const void* y) {
 	return  (*(int*)x - *(int*)y);
 }
@@ -43,6 +48,14 @@ string encryptString(string  s, int  key);
 
 string toupperString(string s1);
 void bubbleSort(vector<string>& v, char order);
+
+int com(const void* x, const void* y) {
+	return  (*(int*)x - *(int*)y);
+}
+
+bool sequenceSearch(const string& s, int nc, char c);
+
+string normalizeName(const string& name);
 
 int main() {
 
@@ -161,6 +174,7 @@ int main() {
 
 	// exercise 5.2
 
+	/*
 	vector<string> vec{"abc", "ABCD", "aec", "rpdm", "erfd"};
 
 	bubbleSort(vec, 'a');
@@ -170,7 +184,48 @@ int main() {
 	bubbleSort(vec, 'd');
 	for (int x = 0; x < vec.size(); x++) {
 		cout << vec[x];
+	}*/
+
+	// exercise 5.3
+
+	/*
+	// MAGICCCC // NOT WORKING
+	char a[5][3] = { {'a','b','7'}, {'R','b','2'}, {'R','G','3'}, {'A','b','4'}, {'a','B','5'} };
+
+	for (size_t i = 0; i < 5; i++) {
+		for (size_t n = 0; n < 3; n++) {
+			cout << a[i][n];
+		}
+		cout << endl;
 	}
+
+	cout << "After :" << endl;
+	qsort(a, 5, sizeof(char)*3, com);
+	for (size_t i = 0; i < 5; i++) {
+		for (size_t n = 0; n < 3; n++) {
+			cout << a[i][n];
+		}
+		cout << endl;
+	}
+	*/
+
+	// exercise 5.4
+
+	/*
+	cout << sequenceSearch("abcddeedddf", 3, 'd');
+	cout << sequenceSearch("abcddeedddf", 4, 'd');
+	cout << sequenceSearch("abcddeeddddf", 4, 'd');
+	cout << sequenceSearch("OLAOLAAA", 3, 'A');
+	*/
+
+	// exercise 5.5
+
+	/*
+	cout << normalizeName("   Maria da Felicidade dos Reis e Passos Dias de Aguiar   ") << endl;
+	cout << normalizeName("   Ricardo André Araújo de Matos   ");
+	*/
+
+	// exercise 5.6
 }
 
 
@@ -280,3 +335,36 @@ void bubbleSort(vector<string>& v, char order) {
 	}
 }
 
+// exercise 5.4
+
+bool sequenceSearch(const string& s, int nc, char c) {
+	string tem(nc, c);
+	if (s.find(tem) != string::npos) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+// exercise 5.5
+
+string normalizeName(const string& name) {
+	string temp;
+	size_t i1 = name.find_first_not_of(" ");
+	size_t i2 = name.find_last_not_of(" ");
+	vector<string> vec = { " DE ", " DO ", " DA ", " DOS ", " DAS ", " E "};
+
+	temp = name.substr(i1, i2 - i1 + 1);
+	
+	for (int x = 0; x < temp.size(); x++)
+		temp[x] = toupper(temp[x]);
+
+	for (int x = 0; x < vec.size(); x++) {
+		size_t i = temp.find(vec[x]);
+		if (i != string::npos) {
+			temp.erase(i+1, vec[x].size() - 2);
+		}
+	}
+	return temp;
+}
