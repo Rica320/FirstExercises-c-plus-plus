@@ -4,12 +4,17 @@
 #include "Years_Month_days.h"
 #include <string>
 #include "4.7 and 4.8.h"
+#include <sstream> 
 
 using namespace std;
 
 struct Fraction { 
 	int numerator;
 	int denominator;
+};
+
+struct Date { 
+	unsigned int year, month, day; 
 };
 
 int as(const void* x, const void* y) {
@@ -56,6 +61,16 @@ int com(const void* x, const void* y) {
 bool sequenceSearch(const string& s, int nc, char c);
 
 string normalizeName(const string& name);
+
+Fraction readFraction();
+void performop(Fraction op1, Fraction op2, Fraction& result, char op);
+void reduceFraction(Fraction& frac);
+int gcd(int a, int b);
+
+void readDate(Date* d);
+void writeDate(const  Date* d);
+int compareDates(const Date* d1, const Date* d2);
+void  sortDates(Date* d1, Date* d2);
 
 int main() {
 
@@ -226,6 +241,36 @@ int main() {
 	*/
 
 	// exercise 5.6
+
+	/*
+	// NOT As good as the 3.8 - nested operations and others operations to be done
+	char operato;
+	Fraction result{ 0,1 };
+
+	do
+	{
+		Fraction op1 = readFraction();
+		cin >> operato;
+		Fraction op2 = readFraction();
+		performop(op1, op2, result, operato);
+
+	} while (0);
+
+	cout << "result = " << result.numerator << "/" << result.denominator;
+	*/
+
+	// exercise 5.7
+
+	Date Dat, d2{ 2020,5,6 };
+
+	readDate(&Dat);
+	writeDate(&Dat);
+	cout << compareDates(&Dat, &d2) << endl;
+	sortDates(&Dat, &d2);
+	writeDate(&Dat);
+	writeDate(&d2);
+
+	return EXIT_SUCCESS;
 }
 
 
@@ -367,4 +412,92 @@ string normalizeName(const string& name) {
 		}
 	}
 	return temp;
+}
+
+// exercise 5.6
+
+Fraction readFraction() {
+	Fraction x{ 0,1 };
+	cin >> x.numerator;
+	cin.ignore(1);
+	cin >> x.denominator;
+
+	return x;
+}
+void performop(Fraction op1, Fraction op2,Fraction& result, char op) {
+	switch (op)
+	{
+	case '+':
+		result.denominator = op1.denominator * op2.denominator;
+		result.numerator = op1.numerator * op2.denominator + op2.numerator * op1.denominator;
+		reduceFraction(result);
+		break;
+	case '-':
+		result.denominator = op1.denominator * op2.denominator;
+		result.numerator = op1.numerator * op2.denominator - op2.numerator * op1.denominator;
+		reduceFraction(result);
+		break;
+	default:
+		break;
+	}
+}
+void reduceFraction(Fraction& frac) {
+	int a = gcd(frac.numerator, frac.denominator);
+	frac.numerator = frac.numerator / a;
+	frac.denominator = frac.denominator / a;
+}
+int gcd(int a, int b) {
+	if (a < 0)
+		a = -a;
+	if (b < 0)
+		b = -b;
+	if (a == 0 || b == 0)
+		if (a == 0)
+			return b;
+		else
+			return a;
+	while (a != b)
+	{
+		if (a < b)
+			b -= a;
+		else
+			a -= b;
+	}
+	return a;
+}
+
+// exercise 5.7
+
+void readDate(Date* d) {
+	cin >> d->year;
+	cin.ignore(10000, '/');
+	cin >> d->month;
+	cin.ignore(10000, '/'); 
+	cin >> d->day;
+	return;
+}
+
+void  writeDate(const  Date* d) {
+	ostringstream oss;
+	oss << setw(4) << d->year << setfill('0')
+		<< '/' << setw(2) << d->month << setfill('0')
+		<< '/' << setw(2) << d->day << setfill('0');
+	cout << oss.str() << "\n";
+}
+
+int compareDates(const Date* d1, const Date* d2) {
+	int y, m, d;
+
+	y = d1->year - d2->year;
+	m = d1->month - d2->month;
+	d = d1->day - d2->day;
+
+	return (y * 999999 + m * 999 + d >= 0) ? ((y * 999999 + m * 999 + d == 0) ? 0 : 1) : -1;
+}
+void  sortDates(Date* d1, Date* d2) {
+	if (compareDates(d1, d2) > 0) {
+		Date temp = *d2;
+		*d2 = *d1;
+		*d1 = temp;
+	}
 }
